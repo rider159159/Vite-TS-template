@@ -2,7 +2,10 @@
 const api = inject('$api') as any
 
 async function getRadomDog() {
-  const { message, status } = await api.getRadomDog()
+  const query = {
+    id: 'test12354654'
+  }
+  const { message, status } = await api.getRadomDog(query)
   if (status === 'success') {
     console.log(message)
   }

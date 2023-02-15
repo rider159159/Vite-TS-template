@@ -34,11 +34,11 @@ class Http {
 
   // params = methods、 query 等等 axios 本身封裝，透過參數傳遞給 axios
   public httpGet<T>(url: string, params?: AxiosRequestConfig ):Promise<T> {
-    return Http.axiosInstance.get(url, { params }).then(res => res.data).catch()
+    return Http.axiosInstance.get(url,  params ).then(res => res.data).catch()
   }
 
   public httPost(url: string, params?: AxiosRequestConfig) {
-    return Http.axiosInstance.post(url, { params }).then(res => res.data).catch()
+    return Http.axiosInstance.post(url, params ).then(res => res.data).catch()
   }
 
 }
