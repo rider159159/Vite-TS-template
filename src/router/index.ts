@@ -1,23 +1,20 @@
-import list from '@/views/list/index.vue'
-import home from '@/views/home/index.vue'
-
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/list',
-      name: 'list',
-      component: list,
+      path: '/home',
+      name: 'home',
+      component:  () => import('../views/home/index.vue'),
       meta: {
         keepAlive: false,
       }
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home,
+      path: '/projects/:id',
+      name: 'projects',
+      component:  () => import('../views/projects/[id].vue'),
       meta: {
         keepAlive: false,
       }
