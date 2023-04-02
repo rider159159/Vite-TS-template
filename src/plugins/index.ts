@@ -1,11 +1,11 @@
 import { setupDayjs } from './dayjs';
-import { setupDayjs } from './gsap';
-import { setupDayjs } from './dayjs';
+import { setupGSAP } from './gsap';
+import { setupSweetAlert } from './sweet-alert';
 
 import { App } from 'vue';
 
 export function setupPlugins(AppInstance:App<Element>) {
-  setupGsap(AppInstance);
+  setupGSAP(AppInstance);
   setupSweetAlert(AppInstance);
   setupDayjs(AppInstance);
 }

@@ -1,3 +1,10 @@
 import dog from './dog'
+import member from './member'
 
-export default dog
+
+const api = {
+  dog,
+  member
+}
+
+export default api

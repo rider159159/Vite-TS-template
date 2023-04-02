@@ -1,12 +1,16 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-  <router-view  v-slot="{ Component, route }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component" :key="route" />
-    </transition>
-  </router-view>
+  <Header></Header>
+  <div class="min-h-[100vh] pt-56px">
+    <router-view  v-slot="{ Component, route }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="route" />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <style scoped lang="scss">

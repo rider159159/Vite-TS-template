@@ -7,11 +7,7 @@ const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
 
 async function getRadomDog() {
-  const query = {
-    id: '1',
-    content: 'Ryder'
-  }
-  const { message, status } = await api.getRadomDog(query)
+  const { message, status } = await api.dog.getRadomDog()
   if (status === 'success') {
     USER_INFO_REF.value = message
   }
