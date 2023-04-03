@@ -1,10 +1,10 @@
-import dog from './dog'
 import member from './member'
+import project from './project'
 
 
 const api = {
-  dog,
-  member
+  member,
+  project
 }
 
 export default api
