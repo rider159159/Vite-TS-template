@@ -17,7 +17,6 @@ class Http {
   private httpInterceptorsRequest() {
     // TODO: axios request 攔截器，API 統一設定可來此
     Http.axiosInstance.interceptors.request.use((config) => {
-      console.log('test')
       return config
     },error => {
       return Promise.reject(error)
