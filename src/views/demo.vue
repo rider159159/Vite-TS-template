@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const count = ref(0)
 const text = ref('')
 const propsTitle = ref('')
@@ -17,7 +17,8 @@ function checkValue (content) {
 
 <template>
   <div>
-    <Ckeditor v-model="text" :count="count" @checkValue="checkValue"></Ckeditor>
-    <button type="button" @click="showEditorData">測試</button>
+    <!-- <NewTest></NewTest> -->
+    <Test></Test>
+    <!-- <Ckeditor v-model="text" :count="count" @checkValue="checkValue"></Ckeditor> -->
   </div>
 </template>
