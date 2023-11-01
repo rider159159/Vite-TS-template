@@ -1,32 +1,43 @@
+<script setup>
+import * as d3 from 'd3';
+import worldData from '@/assets/taiwan.json'
+import { geoMercator, geoPath } from 'd3-geo'
+import { feature,mesh } from 'topojson-client'
+
+onMounted(() => {
+  drawChart();
+})
+
+let mySvg 
+
+function drawChart() {
+  mySvg = d3.select("#mySVG");
+
+  const projection = d3.geoMercator()
+    .center([121, 24]) 
+    .scale(8000)
+    .translate([480, 250]);
+
+  const path = d3.geoPath()
+    .projection(projection);
+
+  // 在svg上绘制路径  
+  mySvg.selectAll("path")
+    .data(worldData.features)
+    .enter()
+    .append("path")
+    .attr("d", path);
+}
+
+</script>
+
 <template>
-  <div ref="d3Container"></div>
+  <svg id="mySVG"></svg>
 </template>
 
-<script>
-import { onMounted, ref } from 'vue'
-import * as d3 from 'd3'
-
-export default {
-  name: 'D3Component',
-  setup() {
-    const d3Container = ref(null)
-
-    onMounted(() => {
-      if (d3Container.value) {
-        const svg = d3.select(d3Container.value)
-          .append('svg')
-          .attr('width', 400)
-          .attr('height', 400)
-
-        svg.append('circle')
-          .attr('cx', 200)
-          .attr('cy', 200)
-          .attr('r', 50)
-          .attr('fill', 'blue')
-      }
-    })
-
-    return { d3Container }
-  }
+<style>
+#mySVG {
+  width: 680px;
+  height: 600px;
 }
-</script>
+</style>

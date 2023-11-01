@@ -17,8 +17,7 @@ function checkValue (content) {
 
 <template>
   <div>
-    <!-- <NewTest></NewTest> -->
-    <Test></Test>
-    <!-- <Ckeditor v-model="text" :count="count" @checkValue="checkValue"></Ckeditor> -->
+    <NewTest></NewTest>
+    <!-- <Test></Test> -->
   </div>
 </template>
