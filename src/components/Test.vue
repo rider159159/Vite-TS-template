@@ -34,14 +34,14 @@ function drawChart() {
     .attr("d", path)
     .on("click", clicked);
 
-    states.append("title")
-      .text(d => d.properties.name);
+  states.append("title")
+    .text(d => d.properties.name);
 
-    g.append("path")
-      .attr("fill", "none")
-      .attr("stroke", "white")
-      .attr("stroke-linejoin", "round")
-      .attr("d", path(mesh(worldData, worldData.objects.states, (a, b) => a !== b)));
+  g.append("path")
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path(mesh(worldData, worldData.objects.states, (a, b) => a !== b)));
 
     svg.call(zoom);
   return svg.node()

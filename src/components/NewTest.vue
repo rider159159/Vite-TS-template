@@ -12,6 +12,7 @@ let mySvg
 
 function drawChart() {
   mySvg = d3.select("#mySVG");
+  const g = mySvg.append("g");
 
   const projection = d3.geoMercator()
     .center([121, 24]) 
@@ -27,6 +28,13 @@ function drawChart() {
     .enter()
     .append("path")
     .attr("d", path);
+
+    g.append("path")
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path(mesh(worldData, worldData.objects.states, (a, b) => a !== b)));
+
 }
 
 </script>
