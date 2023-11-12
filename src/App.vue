@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <Header></Header>
-  <div class="min-h-[100vh] pt-56px">
+  <MyHeader></MyHeader>
+  <div class="min-h-[100vh] pt-68px">
     <router-view  v-slot="{ Component, route }">
       <transition name="fade" mode="out-in">
         <component :is="Component" :key="route" />
