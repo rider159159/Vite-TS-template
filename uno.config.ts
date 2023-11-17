@@ -9,7 +9,18 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      DarkBlue: '#1E3E8F',
-    }
+      brand: {
+        1: '#FFE871',
+        2: '#FFF99F',
+      },
+      gray: {
+        1: '#333333',
+        2: '#4f4f4f',
+        3: '#828282',
+        4: '#BDBDBD',
+        5: '#e0e0e0'
+      },
+      line: '#C2D7EA'
+    },
   }
 })

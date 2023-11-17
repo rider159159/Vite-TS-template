@@ -1,6 +1,6 @@
 import { App } from 'vue';
-import { createRouter, createWebHistory } from "vue-router"
-import permission from './permission';
+import { createRouter, createWebHistory } from 'vue-router'
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -28,12 +28,11 @@ const router = createRouter({
         keepAlive: false,
       }
     }
-  ],
+  ]
 })
 
 export function setupRouter(AppInstance:App<Element>) {
-  permission(router);
-  AppInstance.use(router);
+  AppInstance.use(router)
 }
 
 export default router
