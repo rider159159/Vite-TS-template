@@ -1,40 +1,36 @@
 <script setup>
 import * as d3 from 'd3';
-import worldData from '@/assets/taiwan.json'
+import worldData from '@/assets/COUNTY_MOI_1090820.json'
 import { geoMercator, geoPath } from 'd3-geo'
 import { feature,mesh } from 'topojson-client'
 
 onMounted(() => {
+  console.log(worldData)
   drawChart();
 })
 
-let mySvg 
 
 function drawChart() {
-  mySvg = d3.select("#mySVG");
-  const g = mySvg.append("g");
+  var svg = d3.select("svg");
+  const g = svg.append("g");
 
-  const projection = d3.geoMercator()
-    .center([121, 24]) 
-    .scale(8000)
-    .translate([480, 250]);
-
-  const path = d3.geoPath()
-    .projection(projection);
-
-  // 在svg上绘制路径  
-  mySvg.selectAll("path")
-    .data(worldData.features)
-    .enter()
-    .append("path")
-    .attr("d", path);
+  var projectmethod = d3.geoMercator().center([123, 24]).scale(5500);
+  var pathGenerator = d3.geoPath().projection(projectmethod);
+  d3.json(worldData)
+  .then(data => {
+    console.log(data)
+    const geometries = topojson.feature(data, data.objects["COUNTY_MOI_1090820"])
 
     g.append("path")
-    .attr("fill", "none")
-    .attr("stroke", "white")
-    .attr("stroke-linejoin", "round")
-    .attr("d", path(mesh(worldData, worldData.objects.states, (a, b) => a !== b)));
-
+    const paths = g.selectAll("path").data(geometries.features);
+    paths.enter()
+      .append("path")
+        .attr("d", pathGenerator)
+        .attr("class","county")
+      // 加上簡易版本 tooltip
+      .append("title")
+        .text(d => d.properties["COUNTYNAME"])
+  })
 }
 
 </script>
