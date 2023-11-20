@@ -17,7 +17,8 @@ function checkValue (content) {
 
 <template>
   <div>
-    <BarChat></BarChat>
+    <BarChat2></BarChat2>
+    <!-- <BarChat></BarChat> -->
     <!-- <NewTest></NewTest> -->
     <!-- <Test></Test> -->
   </div>
