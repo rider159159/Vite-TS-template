@@ -21,7 +21,6 @@ function drawChart(element, data) {
     d.DPP = convertToNumber(d.DPP);
     d.Total = convertToNumber(d.Total);
   });
-  console.log(data)
 
   const margin = { top: 20, right: 30, bottom: 40, left: 90 };
   const width = 960 - margin.left - margin.right;
@@ -59,7 +58,7 @@ function drawChart(element, data) {
 
   const stackedData = d3.stack()
     .keys(subgroups)(data);
-  console.log(stackedData)
+
   svg.append("g")
     .selectAll("g")
     .data(stackedData)
@@ -71,11 +70,8 @@ function drawChart(element, data) {
     .enter()
     .append("rect")
       .attr("y", d => y(d.data.City))
-      // .attr("x", d => x(d[0]))
-      .attr("width", d => {
-        console.log(d[0])
-        return x(d[1]) - x(d[0])
-      })
+      .attr("x", d => x(d[0]))
+      .attr("width", d => x(d[1]) - x(d[0]))
       .attr("height", y.bandwidth());
 }
 </script>

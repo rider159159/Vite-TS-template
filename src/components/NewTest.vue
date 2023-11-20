@@ -74,12 +74,6 @@ body {
       background: lightblue;
     }
 
-    /* .county {
-      fill: #ebf0e4;
-      stroke: gray;
-      stroke-width: 0.1px;
-    } */
-
     .custom_tooltip {
       position: absolute;
       text-align: left;
