@@ -3,13 +3,7 @@ import { onMounted, ref } from 'vue';
 import * as d3 from 'd3';
 import voteJSON2020 from '@/assets/vote2020.json';
 
-const processedData = voteJSON2020.map(d => ({
-  City: d.City,
-  PFP: convertToNumber(d.PFP),
-  KMT: convertToNumber(d.KMT),
-  DPP: convertToNumber(d.DPP),
-  Total: convertToNumber(d.Total)
-}));
+const processedData = voteJSON2020
 const borderRadius = 5; // 這是你想要的 border-radius 大小
 
 const subgroups = ["PFP", "KMT", "DPP"];
