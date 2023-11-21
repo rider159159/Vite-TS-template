@@ -1,12 +1,12 @@
 <script setup>
 import * as d3 from 'd3';
-import voteJSON from '@/assets/vote.json'
+import voteJSON2020 from '@/assets/vote2022.json'
 
 const chart = ref(null);
 
 onMounted(()=> {
   if (chart.value) {
-    drawChart(chart.value, voteJSON);
+    drawChart(chart.value, voteJSON2020);
   }
 })
 

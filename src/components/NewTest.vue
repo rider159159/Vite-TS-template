@@ -1,6 +1,5 @@
 <script setup>
 import * as d3 from 'd3';
-import voteJSON from '@/assets/vote.json'
 import taiwanMap from '@/assets/COUNTY_MOI_1090820.json'
 import { geoMercator, geoPath } from 'd3-geo'
 import { feature,mesh } from 'topojson-client'

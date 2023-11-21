@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <MyHeader></MyHeader>
+  <!-- <MyHeader></MyHeader> -->
   <div class="min-h-[100vh] pt-68px">
     <router-view  v-slot="{ Component, route }">
       <transition name="fade" mode="out-in">
