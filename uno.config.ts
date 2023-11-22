@@ -10,11 +10,13 @@ export default defineConfig({
   theme: {
     colors: {
       brand: {
-        1: '#FFE871',
-        2: '#FFF99F',
+        1: '#D4009B',
+        2: '#57D2A9', // 綠
+        3: '#8082FF', // 藍
+        4: '#F4A76F' // 橘
       },
       gray: {
-        1: '#333333',
+        1: '#E9ECEF',
         2: '#4f4f4f',
         3: '#828282',
         4: '#BDBDBD',

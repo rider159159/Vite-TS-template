@@ -18,6 +18,7 @@ declare module 'vue' {
     ProgressBar: typeof import('./src/components/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TaiwanMap: typeof import('./src/components/TaiwanMap.vue')['default']
     Test: typeof import('./src/components/Test.vue')['default']
   }
 }

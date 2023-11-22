@@ -13,6 +13,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/vote',
+      name: 'vote',
+      component:  () => import('../views/vote.vue'),
+      meta: {
+        keepAlive: false,
+      }
+    },
+    {
       path: '/',
       name: 'home',
       component:  () => import('../views/home/index.vue'),

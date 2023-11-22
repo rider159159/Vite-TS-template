@@ -12,9 +12,9 @@
 </script>
 
 <template>
-  <div class="">
-    <NewTest></NewTest>
-    <!-- <Banner></Banner> -->
-
-  </div>
+  <main class="">
+    <section>
+      <RouterLink to="/vote?q=2020" class="bg-gray-1 b-rounded-50px">2020</RouterLink>
+    </section>
+  </main>
 </template>

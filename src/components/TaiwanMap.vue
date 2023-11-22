@@ -54,7 +54,7 @@ async function drawChart() {
 </script>
 
 <template>
-  <section class="flex">
+  <section class="flex taiwanMap">
     <svg id="mySVG"></svg>
     <div class="flex flex-col">
       <p>縣市名稱:</p>
@@ -65,24 +65,24 @@ async function drawChart() {
 
 <style>
 #mySVG {
-  width: 680px;
+  width: 500px;
   height: 600px;
 }
 
-body {
-      background: lightblue;
-    }
+.taiwanMap {
+  background: #E4FAFF;
+}
 
-    .custom_tooltip {
-      position: absolute;
-      text-align: left;
-      width: max-content;
-      padding: 10px;
-      font: 10px;
-      background: #f0eeeb;
-      color: dimgray;
-      border: 1px solid dimgray;
-      border-radius: 3px;
-      pointer-events: none;
-    }
+.custom_tooltip {
+  position: absolute;
+  text-align: left;
+  width: max-content;
+  padding: 10px;
+  font: 10px;
+  background: #f0eeeb;
+  color: dimgray;
+  border: 1px solid dimgray;
+  border-radius: 3px;
+  pointer-events: none;
+}
 </style>

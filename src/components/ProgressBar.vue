@@ -37,7 +37,7 @@ const props =  defineProps({
     default: 0
   },
 })
-const size = 200; // SVG size
+const size = 160; // SVG size
 const stroke = 10; // Stroke width
 const radius = size / 2; // Circle radius
 const normalizedRadius = radius - stroke * 2;
