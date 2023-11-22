@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue';
 import * as d3 from 'd3';
 import voteJSON2020 from '@/assets/vote2020.json';
 
-const processedData = voteJSON2020
+const processedData = voteJSON2020.city
 const borderRadius = 5; // 這是你想要的 border-radius 大小
 
 const subgroups = ["PFP", "KMT", "DPP"];
@@ -22,8 +22,7 @@ function convertToNumber(str) {
 }
 
 function rightRoundedRect(x, y, width, height, radius) {
-  return 
-      "M" + x + "," + y
+  return "m" + x + "," + y
       + "h" + (width - radius)
       + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius
       + "v" + (height - 2 * radius)
@@ -34,13 +33,13 @@ function rightRoundedRect(x, y, width, height, radius) {
 
 function leftRoundedRect(x, y, width, height, radius) {
   return "m" + (x + radius) + "," + y
-       + "h" + (width - radius)
-       + "v" + height
-       + "h" + (radius - width)
-       + "a" + radius + "," + radius + " 0 0 1 " + (-radius) + "," + (-radius)
-       + "v" + (2 * radius - height)
-       + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + (-radius)
-       + "z";
+      + "h" + (width - radius)
+      + "v" + height
+      + "h" + (radius - width)
+      + "a" + radius + "," + radius + " 0 0 1 " + (-radius) + "," + (-radius)
+      + "v" + (2 * radius - height)
+      + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + (-radius)
+      + "z";
 }
 
 function drawBarChart(data, chartId) {
@@ -80,7 +79,8 @@ function drawBarChart(data, chartId) {
       const y1 = height;
 
       // 根據圖表的顏色來選擇相應的繪圖函數
-      if (layer.key === 'DPP') { // 綠色圖表，右邊圓角
+      if (layer.key === 'DPP') { 
+        // 綠色圖表，右邊圓角
         return rightRoundedRect(x0, 0, w, y1, borderRadius);
       } else if(layer.key === 'PFP') {
         return leftRoundedRect(x0, 0, w, y1, borderRadius);
