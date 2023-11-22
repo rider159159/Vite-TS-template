@@ -7,6 +7,7 @@
 
 <template>
   <div>
-    <BarChat2></BarChat2>
+    <!-- <BarChat2></BarChat2> -->
+    <LineChat></LineChat>
   </div>
 </template>

@@ -22,13 +22,14 @@ function convertToNumber(str) {
 }
 
 function rightRoundedRect(x, y, width, height, radius) {
-  return "M" + x + "," + y
-       + "h" + (width - radius)
-       + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius
-       + "v" + (height - 2 * radius)
-       + "a" + radius + "," + radius + " 0 0 1 " + -radius + "," + radius
-       + "h" + (radius - width)
-       + "z";
+  return 
+      "M" + x + "," + y
+      + "h" + (width - radius)
+      + "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius
+      + "v" + (height - 2 * radius)
+      + "a" + radius + "," + radius + " 0 0 1 " + -radius + "," + radius
+      + "h" + (radius - width)
+      + "z";
 }
 
 function leftRoundedRect(x, y, width, height, radius) {
