@@ -65,8 +65,8 @@ function drawChart(element) {
 
   // 設定圖表的尺寸和邊距
   const margin = { top: 10, right: 30, bottom: 30, left: 60 }
-  const width = 960 - margin.left - margin.right
-  const height = 500 - margin.top - margin.bottom
+  const width = 650 - margin.left - margin.right
+  const height = 250 - margin.top - margin.bottom
 
   // 添加 SVG 元素到頁面的元素中
   const svg = d3.select(element)

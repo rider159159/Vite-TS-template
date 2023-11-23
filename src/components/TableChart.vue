@@ -91,14 +91,33 @@ function drawBarChart(data, chartId) {
 </script>
 
 <template>
-  <table>
-    <tr v-for="(item, index) in processedData" :key="index">
-      <td>{{ item.City }}</td>
-      <td class="chart-cell">
-        <svg :id="`chart-${index}`" class="bar-chart" />
-      </td>
-      <td>{{ item.Total }}</td>
-    </tr>
+  <table class="w-full">
+    <thead>
+      <tr>
+        <th class="text-left">縣市</th>
+        <th class="text-left">得票率</th>
+        <th class="text-left">當選人</th>
+        <th class="text-left">投票數</th>
+        <th class="text-left">投票率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(item, index) in processedData" :key="index">
+        <td>{{ item.City }}</td>
+        <td class="chart-cell">
+          <svg :id="`chart-${index}`" class="bar-chart" />
+        </td>
+        <td>
+          <img src="" alt="德古拉">
+        </td>
+        <td>
+          {{ item.Valid }}
+        </td>
+        <td>
+          {{ ((item.Valid/item.Total).toFixed(2) * 100) }}
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
