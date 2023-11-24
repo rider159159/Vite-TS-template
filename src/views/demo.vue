@@ -1,13 +1,39 @@
 <script setup lang="ts">
-// const count = ref(0)
-// const text = ref('')
-// const propsTitle = ref('')
+import taiwanCity from '@/assets/taiwanCity.json'
+
 const percentage = ref(50)
+
+const taiwanCityList = ref()
+const targetCity = ref('')
+function makeJson() {
+  taiwanCityList.value = taiwanCity.map((item) => {
+    return item.CityName
+  })
+}
+
+// const townsCityList = computed({
+//   get: () => targetCity.value,
+//   set: () => {
+//     const targe = taiwanCity.filter(i => i.CityName === targetCity.value)
+//     return targe
+//   },
+// })
+const townsCityList = ref({
+  // AreaList: =
+})
+
+watch(targetCity, () => {
+  const targe = taiwanCity.filter(i => i.CityName === targetCity.value)
+  townsCityList.value = targe[0]
+})
+
+onMounted(() => {
+  makeJson()
+})
 </script>
 
 <template>
-  <div>
-    <BarChat2 />
+  <div class="flex flex-col">
     <!-- <LineChat></LineChat> -->
     <!-- <GroupBarChat></GroupBarChat>
     <ProgressBar :percentage="percentage"></ProgressBar> -->
@@ -17,5 +43,16 @@ const percentage = ref(50)
     <button class="p-6 bg-blue text-white" @click="percentage -= 1">
       -1
     </button>
+    <select id="taiwanCity" v-model="targetCity" name="">
+      <option v-for="item in taiwanCityList" :key="item" :value="item">
+        {{ item }}
+      </option>
+    </select>
+    {{ townsCityList }}
+    <select v-if="targetCity" id="taiwanCity" name="">
+      <option v-for="item in townsCityList.AreaList" :key="item" :value="item">
+        {{ item }}
+      </option>
+    </select>
   </div>
 </template>

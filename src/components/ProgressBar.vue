@@ -1,3 +1,23 @@
+<script setup>
+import { computed, ref } from 'vue'
+
+const props = defineProps({
+  percentage: {
+    type: Number,
+    default: 0,
+  },
+})
+const size = 160 // SVG size
+const stroke = 10 // Stroke width
+const radius = size / 2 // Circle radius
+const normalizedRadius = radius - stroke * 2
+const circumference = normalizedRadius * 2 * Math.PI
+
+const fillColor = 'transparent' // The fill color of the circle
+
+const strokeDashOffset = computed(() => circumference - (props.percentage / 100) * circumference)
+</script>
+
 <template>
   <div class="progress-ring">
     <svg :width="size" :height="size">
@@ -9,9 +29,9 @@
         :r="normalizedRadius"
         :cx="radius"
         :cy="radius"
-        :stroke-dasharray="circumference + ' ' + circumference"
+        :stroke-dasharray="`${circumference} ${circumference}`"
         :stroke-dashoffset="0"
-      ></circle>
+      />
       <!-- 前景圓形，顯示已完成的進度 -->
       <circle
         class="progress-ring__circle"
@@ -20,34 +40,13 @@
         :r="normalizedRadius"
         :cx="radius"
         :cy="radius"
-        :stroke-dasharray="circumference + ' ' + circumference"
+        :stroke-dasharray="`${circumference} ${circumference}`"
         :stroke-dashoffset="strokeDashOffset"
-      ></circle>
+      />
     </svg>
     <span class="progress-ring__text">{{ props.percentage }}%</span>
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue';
-
-const props =  defineProps({
-  percentage: {
-    type: Number,
-    default: 0
-  },
-})
-const size = 160; // SVG size
-const stroke = 10; // Stroke width
-const radius = size / 2; // Circle radius
-const normalizedRadius = radius - stroke * 2;
-const circumference = normalizedRadius * 2 * Math.PI;
-
-const percentage = ref(66.27); // The percentage value you want to display
-const fillColor = 'transparent'; // The fill color of the circle
-
-const strokeDashOffset = computed(() => circumference - (props.percentage / 100) * circumference);
-</script>
 
 <style>
 .progress-ring {

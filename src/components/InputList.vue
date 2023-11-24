@@ -2,7 +2,7 @@
 import taiwanCity from '@/assets/taiwanCity.json'
 
 onMounted(() => {
-  taiwanCity
+
 })
 </script>
 

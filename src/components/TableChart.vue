@@ -94,11 +94,21 @@ function drawBarChart(data, chartId) {
   <table class="w-full">
     <thead>
       <tr>
-        <th class="text-left">縣市</th>
-        <th class="text-left">得票率</th>
-        <th class="text-left">當選人</th>
-        <th class="text-left">投票數</th>
-        <th class="text-left">投票率</th>
+        <th class="text-left">
+          縣市
+        </th>
+        <th class="text-left">
+          得票率
+        </th>
+        <th class="text-left">
+          當選人
+        </th>
+        <th class="text-left">
+          投票數
+        </th>
+        <th class="text-left">
+          投票率
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -114,7 +124,7 @@ function drawBarChart(data, chartId) {
           {{ item.Valid }}
         </td>
         <td>
-          {{ ((item.Valid/item.Total).toFixed(2) * 100) }}
+          {{ (item.Valid / item.Total).toFixed(2) * 100 }}
         </td>
       </tr>
     </tbody>

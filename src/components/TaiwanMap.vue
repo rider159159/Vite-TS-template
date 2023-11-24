@@ -26,7 +26,7 @@ async function drawChart() {
     .append('div')
     .attr('id', 'tooltip')
     .attr('style', 'position: absolute; opacity: 0;')
-  const projection = d3.geoMercator().center([123, 24]).scale(5500)
+  // const projection = d3.geoMercator().center([123, 24]).scale(5500)
 
   // 引入 JSON
   const geometries = feature(taiwanMap, taiwanMap.objects.COUNTY_MOI_1090820)
