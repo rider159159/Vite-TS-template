@@ -68,8 +68,13 @@ async function drawChart() {
       //   .html(`縣市名稱: ${d.properties.NAME}<br>其他資料: ${d.properties.OTHER_INFO}`);
     })
 
-  
-  
+    const rectBackgrounds = [
+    { id: '澎湖縣', x: 100, y: 100, width: 50, height: 30 },
+    { id: '金門縣', x: 150, y: 150, width: 50, height: 30 },
+    { id: '連江縣', x: 200, y: 200, width: 50, height: 30 },
+  ];
+
+
     // 繪製縣市名稱
   g.selectAll('.county-name')
     .data(geometries.features)
@@ -92,13 +97,28 @@ async function drawChart() {
     //   }
     // })
     // .attr('stroke', '#fff')
+
+        // 為特定縣市繪製白色背景
+        geometries.features.forEach(feature => {
+    if (['澎湖縣', '金門縣', '連江縣'].includes(feature.properties.COUNTYNAME)) {
+      const centroid = pathGenerator.centroid(feature);
+      g.append('rect')
+        .attr('x', centroid[0] - 25) // 根據中心點調整位置
+        .attr('y', centroid[1] - 15)
+        .attr('width', 50)
+        .attr('height', 30)
+        .attr('fill', 'white')
+        .style('opacity', 0.5);  // 設定透明度為 0.5
+
+    }
+  });
   g.append('path')
 }
 </script>
 
 <template>
   <section class="flex taiwanMap">
-    <svg id="mySVG" />
+    <svg id="mySVG" class="lg:w-350px 2xl:w-500px h-700px" />
     <!-- <div class="flex flex-col">
       <p>縣市名稱:</p>
       <p>{{ currentCity }}</p>
@@ -107,10 +127,7 @@ async function drawChart() {
 </template>
 
 <style>
-#mySVG {
-  width: 500px;
-  height: 600px;
-}
+
 
 .taiwanMap {
   background: #E4FAFF;
@@ -132,9 +149,24 @@ async function drawChart() {
   font-size: 6px;
   fill: #fff; /* 文字顏色 */
   pointer-events: none; /* 確保文字不會影響點擊事件 */
+  text-shadow:
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; /* 每一行代表一個陰影的方向和顏色 */
 }
 
 .county-background{
   background: #fff;
+}
+
+.outlined-text {
+    color: white; /* 設置文字顏色為白色 */
+    text-shadow:
+        -2px -2px 0 #000,  
+        2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000; /* 每一行代表一個陰影的方向和顏色 */
+    font-size:24px
 }
 </style>
