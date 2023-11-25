@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import taiwanCity from '@/assets/taiwanCity.json'
 
 const percentage = ref(50)
@@ -18,13 +18,13 @@ function makeJson() {
 //     return targe
 //   },
 // })
-const townsCityList = ref({
-  // AreaList: =
-})
+const townsCityList = ref(
+[])
 
 watch(targetCity, () => {
   const targe = taiwanCity.filter(i => i.CityName === targetCity.value)
-  townsCityList.value = targe[0]
+  console.log( targe[0].AreaList)
+  townsCityList.value = targe[0].AreaList
 })
 
 onMounted(() => {
@@ -48,10 +48,9 @@ onMounted(() => {
         {{ item }}
       </option>
     </select>
-    {{ townsCityList }}
     <select v-if="targetCity" id="taiwanCity" name="">
-      <option v-for="item in townsCityList.AreaList" :key="item" :value="item">
-        {{ item }}
+      <option v-for="item in townsCityList" :key="item" :value="item">
+        {{ item.AreaName }}
       </option>
     </select>
   </div>
