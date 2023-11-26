@@ -1,7 +1,8 @@
 <script setup>
 import vote2020 from '@/assets/vote2020.json'
 import * as d3 from 'd3'
-import { DPPColor, KMTColor, PFPColor } from '@/utils/color'
+import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
+import { voteRate,numberWithCommas } from '@/utils/share/methods'
 
 const subgroups = ['KMT','PFP', 'DPP']
 const route = useRoute()
@@ -98,7 +99,7 @@ function drawBarChart(data) {
     })
 }
 
-const checkVote = computed( ()=>{
+const checkVote = computed(()=>{
   if(voteData.value.count) {
     const { PFP, KMT, DPP } = voteData.value.count
     let maxParty = 'PFP'; // 預設為 PFP
@@ -114,6 +115,10 @@ const checkVote = computed( ()=>{
   }
   return null
 })
+
+// const percentage = computed(()=>{
+
+// })
 
 onMounted(()=>{
   getData()
@@ -146,7 +151,7 @@ onMounted(()=>{
                       <img v-if="checkVote==='KMT'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
                     <div class="text-#334155">
-                      <span>{{ voteData.count.KMT }}</span>
+                      <span>{{ numberWithCommas(voteData.count.KMT) }}</span>
                       票
                     </div>
                   </div>
@@ -160,7 +165,7 @@ onMounted(()=>{
                       <img v-if="checkVote==='PFP'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
                     <div class="text-#334155">
-                      <span>{{ voteData.count.PFP }}</span>
+                      <span>{{ numberWithCommas(voteData.count.PFP) }}</span>
                       票
                     </div>
                   </div>
@@ -174,7 +179,7 @@ onMounted(()=>{
                       <img v-if="checkVote==='DPP'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
                     <div class="text-#334155">
-                      <span>{{ voteData.count.DPP }}</span>
+                      <span>{{ numberWithCommas(voteData.count.DPP) }}</span>
                       票
                     </div>
                   </div>
@@ -184,43 +189,43 @@ onMounted(()=>{
 
             </div>
             <!-- 右側投票率 -->
-            <div class="overflow-auto bg-white rounded-12px flex">
-              <ProgressBar :percentage="percentage" />
-              <div class="flex">
-                <div>
-                  <div>
+            <div class="overflow-auto bg-white rounded-12px flex gap-4">
+              <ProgressBar :percentage="voteRate(voteData.count.Valid,voteData.count.Total)" />
+              <div class="grid grid-cols-2 pt-3 pb-6 gap-6">
+                <div >
+                  <div class="mb-4">
                     <p class="text-#64748B text-14px">
                       投票數
                     </p>
-                    <p class="text-#334155 text-14px">
-                      12,448,302
+                    <p class="text-#334155 font-bold">
+                      {{ numberWithCommas(voteData.count.Total) }}
                     </p>
                   </div>
                   <div>
                     <p class="text-#64748B text-14px">
-                      有效投票率
+                      有效投票數
                     </p>
-                    <p class="text-#334155 text-14px">
-                      12,284,970
+                    <p class="text-#334155 font-bold">
+                      {{ numberWithCommas(voteData.count.Valid) }}
                     </p>
                   </div>
                 </div>
 
                 <div>
-                  <div>
+                  <div class="mb-4">
                     <p class="text-#64748B text-14px">
                       投票率
                     </p>
-                    <p class="text-#334155 text-14px">
-                      66.27%
+                    <p class="text-#334155 font-bold">
+                      {{ voteRate(voteData.count.Valid,voteData.count.Total) }}%
                     </p>
                   </div>
                   <div>
                     <p class="text-#64748B text-14px">
                       無效票數
                     </p>
-                    <p class="text-#334155 text-14px">
-                      12,284,970
+                    <p class="text-#334155 font-bold">
+                      {{ numberWithCommas(voteData.count.Invalid) }}
                     </p>
                   </div>
                 </div>

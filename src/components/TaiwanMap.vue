@@ -4,7 +4,7 @@ import { geoMercator, geoPath } from 'd3-geo'
 import { feature, mesh } from 'topojson-client'
 import taiwanMap from '@/assets/COUNTY_MOI_1090820.json'
 import vote2020 from '@/assets/vote2020.json'
-import { DPPColor, KMTColor, PFPColor } from '@/utils/color'
+import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
 
 onMounted(() => {
   drawChart()

@@ -19,7 +19,7 @@ const strokeDashOffset = computed(() => circumference - (props.percentage / 100)
 </script>
 
 <template>
-  <div class="progress-ring">
+  <div class="progress-ring flex justify-center items-center relative">
     <svg :width="size" :height="size">
       <!-- 背景圓形，顯示剩餘的進度 -->
       <circle
@@ -44,16 +44,16 @@ const strokeDashOffset = computed(() => circumference - (props.percentage / 100)
         :stroke-dashoffset="strokeDashOffset"
       />
     </svg>
-    <span class="progress-ring__text">{{ props.percentage }}%</span>
+    <div class="absolute flex flex-col justify-center items-center">
+      <p class="text-#334155 text-14px">投票率</p>
+      <span class="text-#D4009B font-bold text-20px">{{ props.percentage }}%</span>
+    </div>
   </div>
 </template>
 
 <style>
 .progress-ring {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .progress-ring__circle {
@@ -71,7 +71,5 @@ const strokeDashOffset = computed(() => circumference - (props.percentage / 100)
 
 .progress-ring__text {
   position: absolute;
-  font-size: 1.5em;
-  text-anchor: middle;
 }
 </style>
