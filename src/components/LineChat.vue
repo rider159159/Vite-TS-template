@@ -1,5 +1,6 @@
 <script setup>
 import * as d3 from 'd3'
+import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
 
 const d3Chart = ref(null)
 
@@ -101,15 +102,14 @@ function drawChart(element) {
   svg.append('path')
     .datum(data)
     .attr('fill', 'none')
-    .attr('stroke', '#ff8c00')
+    .attr('stroke', PFPColor)
     .attr('stroke-width', 1.5)
     .attr('d', lineGenerator.y(d => y(d.PFP_Percent)))
-
   // 添加 KMT 線條
   svg.append('path')
     .datum(data)
     .attr('fill', 'none')
-    .attr('stroke', '#1f77b4')
+    .attr('stroke', KMTColor)
     .attr('stroke-width', 1.5)
     .attr('d', lineGenerator.y(d => y(d.KMT_Percent)))
 
@@ -117,7 +117,7 @@ function drawChart(element) {
   svg.append('path')
     .datum(data)
     .attr('fill', 'none')
-    .attr('stroke', '#2ca02c')
+    .attr('stroke', DPPColor)
     .attr('stroke-width', 1.5)
     .attr('d', lineGenerator.y(d => y(d.DPP_Percent)))
 
@@ -126,7 +126,7 @@ function drawChart(element) {
 </script>
 
 <template>
-  <section>
+  <section class="min-w-500px">
     <div ref="d3Chart" />
   </section>
 </template>

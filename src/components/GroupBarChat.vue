@@ -1,5 +1,6 @@
 <script setup>
 import * as d3 from 'd3'
+import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
 
 const d3Chart = ref(null)
 
@@ -71,9 +72,9 @@ function drawChart(element, data) {
     .rangeRound([height, 0])
 
   const z = d3.scaleOrdinal()
-    .range(['#ff8c00', '#1f77b4', '#2ca02c'])
+    .range([ KMTColor, PFPColor, DPPColor])
 
-  const keys = ['PFP', 'KMT', 'DPP']
+  const keys = ['KMT','PFP', 'DPP']
 
   x0.domain(data.map(d => d.Year))
   x1.domain(keys).rangeRound([0, x0.bandwidth()])
@@ -119,7 +120,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section>
+  <section class="min-w-500px">
     <div ref="d3Chart" />
   </section>
 </template>

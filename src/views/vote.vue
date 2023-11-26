@@ -140,7 +140,7 @@ onMounted(()=>{
           </h3>
           <section class="w-full grid grid-cols-2 gap-4">
             <!-- 左側政黨 -->
-            <div class="overflow-auto bg-white rounded-12px flex flex-col items-center justify-center">
+            <div class="overflow-auto bg-white rounded-12px flex flex-col justify-center">
               <div class="min-w-500px  grid grid-cols-3 w-full">
                 <div class="flex justify-center">
                   <img class="w-48px h-48px mr-3" src="/Role.png" alt="德古拉">
@@ -185,13 +185,15 @@ onMounted(()=>{
                   </div>
                 </div>
               </div>
-              <svg class="self-center" id="totalChart"></svg>
+              <div class="flex justify-center min-w-500px">
+                <svg id="totalChart"></svg>
+              </div>
 
             </div>
             <!-- 右側投票率 -->
             <div class="overflow-auto bg-white rounded-12px flex gap-4">
               <ProgressBar :percentage="voteRate(voteData.count.Valid,voteData.count.Total)" />
-              <div class="grid grid-cols-2 pt-3 pb-6 gap-6">
+              <div class="min-w-200px grid grid-cols-2 pt-3 pb-6 gap-6">
                 <div >
                   <div class="mb-4">
                     <p class="text-#64748B text-14px">
@@ -235,13 +237,13 @@ onMounted(()=>{
         </div>
         <!-- 總統票數 -->
         <div class="w-full grid grid-cols-2 gap-4 mb-10">
-          <div class="b b-#DEE2E6 rounded-12px">
+          <div class="b b-#DEE2E6 rounded-12px overflow-auto">
             <h3 class="text-20px font-bold px-4 pt-6">
               歷屆政黨得票數
             </h3>
             <GroupBarChat />
           </div>
-          <div class="b b-#DEE2E6 rounded-12px">
+          <div class="b b-#DEE2E6 rounded-12px overflow-auto">
             <h3 class="text-20px font-bold px-4 pt-6">
               歷屆政黨得票率
             </h3>
