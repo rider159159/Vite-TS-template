@@ -1,14 +1,13 @@
 <script setup>
-import vote2020 from '@/assets/vote2020.json'
 import * as d3 from 'd3'
+import vote2020 from '@/assets/vote2020.json'
 import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
-import { voteRate,numberWithCommas } from '@/utils/share/methods'
+import { numberWithCommas, voteRate } from '@/utils/share/methods'
 
-const subgroups = ['KMT','PFP', 'DPP']
+const subgroups = ['KMT', 'PFP', 'DPP']
 const route = useRoute()
 const borderRadius = 5 // 這是你想要的 border-radius 大小
 
-const percentage = ref(50)
 const voteData = ref(vote2020)
 
 const color = d3.scaleOrdinal()
@@ -40,11 +39,11 @@ function getData() {
   const q = route.query || ''
   switch (String(q)) {
     case '2020':
-    voteData.value = vote2020
-      break;
+      voteData.value = vote2020
+      break
     default:
-    voteData.value = vote2020
-      break;
+      voteData.value = vote2020
+      break
   }
 }
 
@@ -99,28 +98,24 @@ function drawBarChart(data) {
     })
 }
 
-const checkVote = computed(()=>{
-  if(voteData.value.count) {
+const checkVote = computed(() => {
+  if (voteData.value.count) {
     const { PFP, KMT, DPP } = voteData.value.count
-    let maxParty = 'PFP'; // 預設為 PFP
-    let maxValue = PFP;
+    let maxParty = 'PFP' // 預設為 PFP
+    let maxValue = PFP
     if (KMT > maxValue) {
-      maxParty = 'KMT';
-      maxValue = KMT;
+      maxParty = 'KMT'
+      maxValue = KMT
     }
-    if (DPP > maxValue) {
-      maxParty = 'DPP';
-    }
-    return maxParty;
+    if (DPP > maxValue)
+      maxParty = 'DPP'
+
+    return maxParty
   }
   return null
 })
 
-// const percentage = computed(()=>{
-
-// })
-
-onMounted(()=>{
+onMounted(() => {
   getData()
   drawBarChart(voteData.value.count)
 })
@@ -132,7 +127,9 @@ onMounted(()=>{
     <div class="flex">
       <TaiwanMap />
       <section class="w-full px-48px">
-        <h2 class="font-bold text-28px pt-32px pb-12px">全臺縣市總統得票 </h2>
+        <h2 class="font-bold text-28px pt-32px pb-12px">
+          全臺縣市總統得票
+        </h2>
         <!-- 總統票數 -->
         <div class="bg-#F3F4F4 p-4 pt-6 rounded-12px mb-6">
           <h3 class="text-20px font-bold">
@@ -145,12 +142,16 @@ onMounted(()=>{
                 <div class="flex justify-center">
                   <img class="w-48px h-48px mr-3" src="/Role.png" alt="德古拉">
                   <div>
-                    <p class="text-12px font-400 text-#64748B">蝙蝠黨</p>
+                    <p class="text-12px font-400 text-#64748B">
+                      蝙蝠黨
+                    </p>
                     <div class="flex">
-                      <p class="text-#334155 mr-2">德古拉</p>
-                      <img v-if="checkVote==='KMT'" src="/check_circle.png" class="w-20px h-20px" alt="">
+                      <p class="text-primary mr-2">
+                        德古拉
+                      </p>
+                      <img v-if="checkVote === 'KMT'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
-                    <div class="text-#334155">
+                    <div class="text-primary">
                       <span>{{ numberWithCommas(voteData.count.KMT) }}</span>
                       票
                     </div>
@@ -159,12 +160,16 @@ onMounted(()=>{
                 <div class="flex justify-center">
                   <img class="w-48px h-48px mr-3" src="/Role-1.png" alt="德古拉">
                   <div>
-                    <p class="text-12px font-400 text-#64748B">弓箭黨</p>
+                    <p class="text-12px font-400 text-#64748B">
+                      弓箭黨
+                    </p>
                     <div class="flex">
-                      <p class="text-#334155 mr-2">林克</p>
-                      <img v-if="checkVote==='PFP'" src="/check_circle.png" class="w-20px h-20px" alt="">
+                      <p class="text-primary mr-2">
+                        林克
+                      </p>
+                      <img v-if="checkVote === 'PFP'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
-                    <div class="text-#334155">
+                    <div class="text-primary">
                       <span>{{ numberWithCommas(voteData.count.PFP) }}</span>
                       票
                     </div>
@@ -173,12 +178,16 @@ onMounted(()=>{
                 <div class="flex justify-center">
                   <img class="w-48px h-48px mr-3" src="/Role-2.png" alt="德古拉">
                   <div>
-                    <p class="text-12px font-400 text-#64748B">木棍黨</p>
+                    <p class="text-12px font-400 text-#64748B">
+                      木棍黨
+                    </p>
                     <div class="flex">
-                      <p class="text-#334155 mr-2">綠巨魔</p>
-                      <img v-if="checkVote==='DPP'" src="/check_circle.png" class="w-20px h-20px" alt="">
+                      <p class="text-primary mr-2">
+                        綠巨魔
+                      </p>
+                      <img v-if="checkVote === 'DPP'" src="/check_circle.png" class="w-20px h-20px" alt="">
                     </div>
-                    <div class="text-#334155">
+                    <div class="text-primary">
                       <span>{{ numberWithCommas(voteData.count.DPP) }}</span>
                       票
                     </div>
@@ -186,20 +195,19 @@ onMounted(()=>{
                 </div>
               </div>
               <div class="flex justify-center min-w-500px">
-                <svg id="totalChart"></svg>
+                <svg id="totalChart" />
               </div>
-
             </div>
             <!-- 右側投票率 -->
             <div class="overflow-auto bg-white rounded-12px flex gap-4">
-              <ProgressBar :percentage="voteRate(voteData.count.Valid,voteData.count.Total)" />
+              <ProgressBar :percentage="voteRate(voteData.count.Valid, voteData.count.Total)" />
               <div class="min-w-200px grid grid-cols-2 pt-3 pb-6 gap-6">
-                <div >
+                <div>
                   <div class="mb-4">
                     <p class="text-#64748B text-14px">
                       投票數
                     </p>
-                    <p class="text-#334155 font-bold">
+                    <p class="text-primary font-bold">
                       {{ numberWithCommas(voteData.count.Total) }}
                     </p>
                   </div>
@@ -207,7 +215,7 @@ onMounted(()=>{
                     <p class="text-#64748B text-14px">
                       有效投票數
                     </p>
-                    <p class="text-#334155 font-bold">
+                    <p class="text-primary font-bold">
                       {{ numberWithCommas(voteData.count.Valid) }}
                     </p>
                   </div>
@@ -218,15 +226,15 @@ onMounted(()=>{
                     <p class="text-#64748B text-14px">
                       投票率
                     </p>
-                    <p class="text-#334155 font-bold">
-                      {{ voteRate(voteData.count.Valid,voteData.count.Total) }}%
+                    <p class="text-primary font-bold">
+                      {{ voteRate(voteData.count.Valid, voteData.count.Total) }}%
                     </p>
                   </div>
                   <div>
                     <p class="text-#64748B text-14px">
                       無效票數
                     </p>
-                    <p class="text-#334155 font-bold">
+                    <p class="text-primary font-bold">
                       {{ numberWithCommas(voteData.count.Invalid) }}
                     </p>
                   </div>

@@ -45,7 +45,9 @@ const strokeDashOffset = computed(() => circumference - (props.percentage / 100)
       />
     </svg>
     <div class="absolute flex flex-col justify-center items-center">
-      <p class="text-#334155 text-14px">投票率</p>
+      <p class="text-primary text-14px">
+        投票率
+      </p>
       <span class="text-#D4009B font-bold text-20px">{{ props.percentage }}%</span>
     </div>
   </div>
