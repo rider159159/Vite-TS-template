@@ -1,3 +1,13 @@
+@font-face {
+  font-family: MyCustomFont;
+  src: url('../../public/font/MantouSans-Regular.ttf') format('truetype');
+  /* 可以添加更多的字體格式，以提供兼容性 */
+}
+
+.font-mantou{
+  font-family: MyCustomFont
+}
+
 *{
   font-family: 'Inter', 'Noto Sans TC', sans-serif;
 }
