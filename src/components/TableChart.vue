@@ -1,15 +1,17 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
 import * as d3 from 'd3'
 import voteJSON2020 from '@/assets/vote2020.json'
+import { numberWithCommas, voteRate } from '@/utils/share/methods'
 
 const processedData = voteJSON2020.city
 const borderRadius = 5 // 這是你想要的 border-radius 大小
 
-const subgroups = ['PFP', 'KMT', 'DPP']
+const subgroups = ['KMT','PFP', 'DPP']
 const color = d3.scaleOrdinal()
   .domain(subgroups)
-  .range(['#ff8c00', '#1f77b4', '#2ca02c'])
+  .range([KMTColor, PFPColor, DPPColor])
 
 onMounted(() => {
   processedData.forEach((item, index) => {
@@ -40,7 +42,7 @@ function leftRoundedRect(x, y, width, height, radius) {
 
 function drawBarChart(data, chartId) {
   const width = 200 // Set the width for the bar chart
-  const height = 20 // Set the height for each bar chart
+  const height = 10 // Set the height for each bar chart
 
   const svg = d3.select(`#${chartId}`)
     .attr('width', width)
@@ -79,7 +81,7 @@ function drawBarChart(data, chartId) {
         // 綠色圖表，右邊圓角
         return rightRoundedRect(x0, 0, w, y1, borderRadius)
       }
-      else if (layer.key === 'PFP') {
+      else if (layer.key === 'KMT') {
         return leftRoundedRect(x0, 0, w, y1, borderRadius)
       }
       else {
@@ -88,57 +90,97 @@ function drawBarChart(data, chartId) {
       }
     })
 }
+
+const checkVote = computed(() => {
+  if (voteJSON2020.count) {
+    const { PFP, KMT, DPP } = voteJSON2020.count
+    let maxParty = 'PFP' // 預設為 PFP
+    let maxValue = PFP
+    if (KMT > maxValue) {
+      maxParty = 'KMT'
+      maxValue = KMT
+    }
+    if (DPP > maxValue)
+      maxParty = 'DPP'
+
+    return maxParty
+  }
+  return null
+})
 </script>
 
 <template>
-  <table class="w-full">
-    <thead>
-      <tr>
-        <th class="text-left">
-          縣市
-        </th>
-        <th class="text-left">
-          得票率
-        </th>
-        <th class="text-left">
-          當選人
-        </th>
-        <th class="text-left">
-          投票數
-        </th>
-        <th class="text-left">
-          投票率
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item, index) in processedData" :key="index">
-        <td>{{ item.City }}</td>
-        <td class="chart-cell">
-          <svg :id="`chart-${index}`" class="bar-chart" />
-        </td>
-        <td>
-          <img src="" alt="德古拉">
-        </td>
-        <td>
-          {{ item.Valid }}
-        </td>
-        <td>
-          {{ (item.Valid / item.Total).toFixed(2) * 100 }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <section class="overflow-x-autos flex flex-col">
+
+    <table class="w-full min-w-780px">
+      <thead class="bg-gray1 ">
+        <tr>
+          <th class="text-left p-2 text-primary rounded-l-4px">
+            地區
+          </th>
+          <th class="text-left p-2 text-primary ">
+            得票率
+          </th>
+          <th class="text-left p-2 text-primary ">
+            當選人
+          </th>
+          <th class="text-left p-2 text-primary ">
+            投票數
+          </th>
+          <th class="text-left p-2 text-primary rounded-r-4px">
+            投票率
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b border-#DEE2E6 last:border-0" v-for="(item, index) in processedData" :key="index">
+          <td class="py-10px pl-2 font-bold text-#334155">{{ item.City }}</td>
+          <td class="chart-cell">
+            <svg :id="`chart-${index}`" class="bar-chart" />
+          </td>
+          <td class="cell">
+            <div v-if="checkVote === 'KMT'" class="flex items-center">
+              <img src="/Role.png" class="rounded-50px mr-4" alt="德古拉">
+              <p>德古拉</p>
+            </div>
+            <div v-if="checkVote === 'DPD'" class="flex items-center">
+              <img src="/Role-1.png" class="rounded-50px mr-4" alt="林克">
+              <p>林克</p>
+            </div>
+            <div v-if="checkVote === 'DPP'" class="flex items-center">
+              <img src="/Role-2.png" class="rounded-50px mr-4" alt="綠巨魔">
+              <p>綠巨魔</p>
+            </div>
+          </td>
+          <td>
+            {{ numberWithCommas(item.Valid) }}
+          </td>
+          <td  class="py-10px pr-2">
+            {{ voteRate(item.Valid ,item.Total)}}%
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
 </template>
 
 <style>
 .bar-chart {
   width: 100%;
   height: 20px;
-  /* Adjust the height if needed */
 }
 
 .chart-cell {
   width: 205px; /* Adjust the width as needed */
+}
+
+.cell{
+  width: 150px;
+}
+
+thead{
+    border-collapse: separate;
+    border-spacing: 0; /* 可選：消除單元格之間的間隔 */
 }
 </style>

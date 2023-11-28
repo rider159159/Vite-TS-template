@@ -5,12 +5,23 @@ import { feature, mesh } from 'topojson-client'
 import taiwanMap from '@/assets/COUNTY_MOI_1090820.json'
 import vote2020 from '@/assets/vote2020.json'
 import { DPPColor, KMTColor, PFPColor } from '@/utils/share/variable'
-
+let selectedCounty
 const cityList = vote2020.city
-const projectmethod = d3.geoMercator().center([122.7, 24]).scale(8500)
-const pathGenerator = d3.geoPath().projection(projectmethod)
-let svg, g, zoom, selectedCounty
+const width = 400;
+const height = 800;
 
+const path = d3.geoPath()
+const zoom = d3.zoom()
+const svg = d3.create("svg")
+const g = svg.append("g");
+
+const projectmethod = d3.geoMercator().center([122.7, 24]).scale(8500)
+const pathGenerator = path.projection(projectmethod)
+
+// 引入 JSON
+const geometries = feature(taiwanMap, taiwanMap.objects.COUNTY_MOI_1090820)
+const paths = g.selectAll('path').data(geometries.features)
+const map = ref()
 // 尋找指定縣市返回縣市顏色
 function findLargestParty(cityName) {
   const cityData = cityList.find(city => city.City === cityName)
@@ -51,15 +62,18 @@ function clicked(event, d) {
     // 如果點擊的是同一個縣市，則不進行放大
     return
   }
+  const [[x0, y0], [x1, y1]] = path.bounds(d);
   selectedCounty = d.properties.COUNTYNAME
 
-  const width = +svg.attr('width')
-  const height = +svg.attr('height')
   const { scale, translate } = calculateZoomView(d, width, height)
+  // 拉近相關
 
   svg.transition().duration(750).call(
     zoom.transform,
-    d3.zoomIdentity.translate(...translate).scale(scale),
+    d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+      .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
   )
 
   // 更新縣市顏色
@@ -71,23 +85,29 @@ function clicked(event, d) {
     .style('fill', d => d3.rgb(findLargestParty(d.properties.COUNTYNAME)).brighter(0.2).toString())
 }
 
+function zoomed(event) {
+  const {transform} = event;
+  g.attr("transform", transform);
+  g.attr("stroke-width", 1 / transform.k);
+}
+
+
 // 繪製地圖
 async function drawChart() {
-  g = svg.append('g')
 
-  d3.select('body')
-    .append('div')
-    .attr('id', 'tooltip')
-    .attr('style', 'position: absolute; opacity: 0')
+  // 創建新的 SVG 元素
+  svg.attr("viewBox", [0, 0, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .attr("style", "max-width: 100%; height: auto;")
 
-  // 引入 JSON
-  const geometries = feature(taiwanMap, taiwanMap.objects.COUNTY_MOI_1090820)
-  const paths = g.selectAll('path').data(geometries.features)
+  zoom.scaleExtent([1, 8])
+    .on("zoom", zoomed)
+
   paths.enter()
     .append('path')
     .attr('d', pathGenerator)
     .attr('class', 'county')
-
     .attr('fill', (d) => {
       return findLargestParty(d.properties.COUNTYNAME)
     })
@@ -106,27 +126,23 @@ async function drawChart() {
     .style('text-anchor', 'middle') // 確保文字居中對齊
 
     .text((d) => { return d.properties.COUNTYNAME })
+    svg.call(zoom);
 
-  g.append('path')
+  map.value.appendChild(svg.node());
 }
 
 onMounted(() => {
-  svg = d3.select('#mySVG')
-  zoom = d3.zoom()
   drawChart()
 })
 </script>
 
 <template>
-  <section class="flex taiwanMap">
-    <svg id="mySVG" class="lg:w-350px 2xl:w-500px h-700px" />
+  <section class="flex bg-#BDBDBD">
+    <div ref="map" class="bg-#E4FAFF min-w-400px h-800px"></div>
   </section>
 </template>
 
 <style>
-.taiwanMap {
-  background: #E4FAFF;
-}
 
 .custom_tooltip {
   position: absolute;

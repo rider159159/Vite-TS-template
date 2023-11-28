@@ -13,6 +13,7 @@ declare module 'vue' {
     InputList: typeof import('./src/components/InputList.vue')['default']
     LineChat: typeof import('./src/components/LineChat.vue')['default']
     Modal: typeof import('./src/components/common/Modal.vue')['default']
+    MYFooter: typeof import('./src/components/layout/MYFooter.vue')['default']
     MyHeader: typeof import('./src/components/layout/MyHeader.vue')['default']
     ProgressBar: typeof import('./src/components/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

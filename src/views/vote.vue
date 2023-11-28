@@ -124,7 +124,7 @@ onMounted(() => {
 <template>
   <main>
     <MyHeader />
-    <div class="flex">
+    <div class="flex mt-66px">
       <TaiwanMap />
       <section class="w-full px-48px">
         <h2 class="font-bold text-28px pt-32px pb-12px">
@@ -137,7 +137,7 @@ onMounted(() => {
           </h3>
           <section class="w-full grid grid-cols-2 gap-4">
             <!-- 左側政黨 -->
-            <div class="overflow-auto bg-white rounded-12px flex flex-col justify-center">
+            <div class="overflow-auto bg-white rounded-12px flex flex-col justify-center scrollbar">
               <div class="min-w-500px  grid grid-cols-3 w-full">
                 <div class="flex justify-center">
                   <img class="w-48px h-48px mr-3" src="/Role.png" alt="德古拉">
@@ -158,7 +158,7 @@ onMounted(() => {
                   </div>
                 </div>
                 <div class="flex justify-center">
-                  <img class="w-48px h-48px mr-3" src="/Role-1.png" alt="德古拉">
+                  <img class="w-48px h-48px mr-3" src="/Role-1.png" alt="林克">
                   <div>
                     <p class="text-12px font-400 text-#64748B">
                       弓箭黨
@@ -176,7 +176,7 @@ onMounted(() => {
                   </div>
                 </div>
                 <div class="flex justify-center">
-                  <img class="w-48px h-48px mr-3" src="/Role-2.png" alt="德古拉">
+                  <img class="w-48px h-48px mr-3" src="/Role-2.png" alt="綠巨魔">
                   <div>
                     <p class="text-12px font-400 text-#64748B">
                       木棍黨
@@ -199,7 +199,7 @@ onMounted(() => {
               </div>
             </div>
             <!-- 右側投票率 -->
-            <div class="overflow-auto bg-white rounded-12px flex gap-4">
+            <div class="overflow-auto bg-white rounded-12px flex gap-4 scrollbar">
               <ProgressBar :percentage="voteRate(voteData.count.Valid, voteData.count.Total)" />
               <div class="min-w-200px grid grid-cols-2 pt-3 pb-6 gap-6">
                 <div>
@@ -245,13 +245,13 @@ onMounted(() => {
         </div>
         <!-- 總統票數 -->
         <div class="w-full grid grid-cols-2 gap-4 mb-10">
-          <div class="b b-#DEE2E6 rounded-12px overflow-auto">
+          <div class="b b-#DEE2E6 rounded-12px overflow-auto scrollbar">
             <h3 class="text-20px font-bold px-4 pt-6">
               歷屆政黨得票數
             </h3>
             <GroupBarChat />
           </div>
-          <div class="b b-#DEE2E6 rounded-12px overflow-auto">
+          <div class="b b-#DEE2E6 rounded-12px overflow-auto scrollbar">
             <h3 class="text-20px font-bold px-4 pt-6">
               歷屆政黨得票率
             </h3>
@@ -259,14 +259,15 @@ onMounted(() => {
           </div>
         </div>
         <!-- 各區域投票總攬 -->
-        <div>
+        <div class="overflow-x-auto scrollbar">
           <h3 class="text-20px font-bold pt-6 mb-2">
-            各區域投票總覽
+            各縣市投票總覽
           </h3>
           <TableChart />
         </div>
       </section>
     </div>
+    <MYFooter />
   </main>
 </template>
 
